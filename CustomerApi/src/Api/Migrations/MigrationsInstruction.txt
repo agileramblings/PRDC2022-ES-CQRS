@@ -1,0 +1,2 @@
+﻿dotnet ef migrations add Initial_Revision -c SqlServerEventDbContext -o Migrations\EventDbMigrations
+dotnet ef migrations add Initial_Revision -c StagingDbContext -o Migrations\StagingDbMigrations
