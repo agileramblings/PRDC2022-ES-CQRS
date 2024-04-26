@@ -1,14 +1,11 @@
 using Autofac;
-using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
-using DepthConsulting.Core.Services.Persistence.EventSource;
 using Microsoft.EntityFrameworkCore;
 using PRDC2022.CustomerApi.Module;
 using PRDC2022.CustomerApi.Options;
 using PRDC2022.CustomerApi.Persistence;
 using Serilog;
 using Serilog.Events;
-using System.Configuration;
 
 namespace PRDC2022.CustomerApi;
 

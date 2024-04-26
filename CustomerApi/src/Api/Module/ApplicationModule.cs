@@ -41,7 +41,8 @@ public class ApplicationModule : Autofac.Module
         builder.RegisterGeneric(typeof(DefaultSnapshotStrategy<>)).As(typeof(ISnapshotStrategy<>));
         builder.RegisterGeneric(typeof(AggregateRepository<>)).As(typeof(IAggregateRepository<>));
         builder.RegisterGeneric(typeof(EventStore<>)).As(typeof(IEventStore<>));
-        builder.RegisterGeneric(typeof(EFEventDescriptorStore<>)).As(typeof(IEventDescriptorStorage<>))
+        builder.RegisterGeneric(typeof(EFEventDescriptorStore<>))
+            .As(typeof(IEventDescriptorStorage<>))
             .SingleInstance();
 
         var cosmosClientOptions = new CosmosClientOptions
