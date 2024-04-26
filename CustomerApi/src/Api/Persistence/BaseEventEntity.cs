@@ -9,6 +9,7 @@ namespace PRDC2022.CustomerApi.Persistence
         [Required] public Guid MessageId { get; set; }
         [Required] public string CorrelationId { get; set; }
         [Required] public Guid CausationId { get; set; }
+        [Required] public Guid TenantId { get; set; }
 
         [Required] [MaxLength(50)] public string AggregateId { get; set; }
 

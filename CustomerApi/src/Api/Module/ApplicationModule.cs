@@ -41,7 +41,7 @@ public class ApplicationModule : Autofac.Module
         builder.RegisterGeneric(typeof(DefaultSnapshotStrategy<>)).As(typeof(ISnapshotStrategy<>));
         builder.RegisterGeneric(typeof(AggregateRepository<>)).As(typeof(IAggregateRepository<>));
         builder.RegisterGeneric(typeof(EventStore<>)).As(typeof(IEventStore<>));
-        builder.RegisterGeneric(typeof(EFEventDescriptorStore<>))
+        builder.RegisterGeneric(typeof(InMemoryEventDescriptorStorage<>))
             .As(typeof(IEventDescriptorStorage<>))
             .SingleInstance();
 

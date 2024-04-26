@@ -16,10 +16,12 @@ namespace PRDC2022.CustomerApi.Persistence
     public class EFEventDescriptorStore<T> : IEventDescriptorStorage<T> where T : AggregateBase
     {
         private readonly ILifetimeScope _container;
+        private readonly ITenantContext _ctx;
 
-        public EFEventDescriptorStore(ILifetimeScope container)
+        public EFEventDescriptorStore(ILifetimeScope container, ITenantContext ctx)
         {
             _container = container;
+             _ctx = ctx;
         }
 
         public async Task<IEnumerable<string>> GetAggregateIdsAsync(int page, int count)
@@ -30,6 +32,7 @@ namespace PRDC2022.CustomerApi.Persistence
 
             var query = db.EventDescriptors
                 .Distinct()
+                .Where(ed => ed.TenantId == _ctx.TenantId)
                 .Where(ed => ed.AggregateType == repoType)
                 .OrderBy(ed => ed.AggregateId)
                 .Skip((page - 1) * count)
@@ -136,6 +139,21 @@ namespace PRDC2022.CustomerApi.Persistence
                 db.Snapshots.Add(ed.ToSnapshotEntity());
             else
                 db.EventDescriptors.Add(ed.ToEventDescriptorEntity());
+        }
+    }
+
+    public interface ITenantContext
+    {
+        public Guid TenantId { get; }
+    }
+
+    public class TenantContext : ITenantContext
+    {
+        public Guid TenantId { get; }
+
+        public TenantContext(Guid tenantId)
+        {
+            TenantId = tenantId;
         }
     }
 }
